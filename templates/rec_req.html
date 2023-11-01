@@ -1,0 +1,32 @@
+<html>
+    <head>
+      <style>
+        th{
+          font-size:22px;
+          font-family:times new roman;
+        }
+        td{
+          font-size:18px;
+          padding:10px;
+          background-color:lightgrey;
+        }
+      </style>
+    </head>
+    <body>
+<h2>Request Recieved</h2><br><br>
+      <table align="center" border="1" cellpadding="5px" cellspacing="0px" width="70%">
+            <tr>
+            {% for i in t %}
+              <th>{{i}}</th>
+            {% endfor %}
+            </tr>
+            {% for k in t1 %}
+            <tr>
+            {% for j in k %}
+              <td align="center">{{j}}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+          </table>
+    </body>
+    </html>

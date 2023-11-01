@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_try/transaction.css' %}">
+    <title> RequestMoney | SimpliPay</title>
+        <style>
+          th{
+            font-size:22px;
+            font-family:times new roman;
+          }
+          td{
+            font-size:18px;
+            padding:10px;
+            background-color:lightgrey;
+          }
+        </style>
+</head>
+
+<body>
+    
+    <form method="post">
+        {% csrf_token %}
+        <h3>Request Money</h3> 
+        <table align="center" border="1" cellpadding="5px" cellspacing="0px" width="70%">
+    <tr>
+        <td valign="center">
+        <label for="fromuid">
+            UserID:
+        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+            <input type="text" placeholder="Enter UserID" name="fromuid" required><br><br>
+        </td>
+    </tr> 
+    <tr>
+        <td valign="center">
+        <label for="amt">Amount:<br><br></label>
+        </td>
+        <td>
+        <input type="number" placeholder="Amount" name="amt" id="amount" required>
+        <p id="msg" style="color:red;margin-left:10px;"></p><br>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+    <div class="center">
+        <button type="submit">SEND</button>
+    </div>
+        </td>
+    </tr>
+</table>
+
+    </form>
+</body>
+</html> 

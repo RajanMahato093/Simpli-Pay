@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_try/transaction.css' %}">
+    <title> SendMoney | SimpliPay</title>  
+ 
+    <script>
+        var tr2,tr,to;
+        function bal_chk(){
+            //tr=parseInt(document.getElementById("cr_bal").value);
+            tr=parseInt({{crr_bal}});
+            tr2=parseInt(document.getElementById("amount").value);
+        if(tr<tr2){
+            document.getElementById("msg").innerHTML="insufficient balance";
+        } 
+        else{
+            document.getElementById("msg").innerHTML="";
+        }
+        } 
+        function conf(){
+            tr2=document.getElementById("amount").value;
+            to=document.getElementById("toacc").value;
+            alert("Sending "+tr2+" to "+to+" A/c");
+        }
+    </script>
+
+    </head>
+
+<body>
+    <h2>Money Transfer via Bank A/c </h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Send Money</h3> 
+<table height="200px">
+    <tr>
+        <td valign="center">
+        <label for="toacc">
+            Account No.:
+        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+            <input type="text" pattern="[0-9]{10}" placeholder="Enter Account No." name="toacc" required><br><br>
+        </td>
+    </tr> 
+    <tr>
+        <td valign="center">
+        <label for="amt">Amount:<br><br></label>
+        </td>
+        <td>
+        <input type="number" placeholder="Amount" name="amt" id="amount" onkeyup="bal_chk()" required>
+        <p id="msg" style="color:red;margin-left:10px;"></p><br>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+    <div class="center">
+        <button type="submit" onClick="conf()">SEND</button>
+    </div>
+        </td>
+    </tr>
+</table>
+
+    </form>
+</body>
+</html>

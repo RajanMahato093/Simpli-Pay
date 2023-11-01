@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <!-- Design by foolishdeveloper.com -->
+    <title>Register | SimpliPay</title>
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 1000px;
+    background-image: linear-gradient(150deg, Darkorange, blue);
+    background-repeat: no repeat;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -300px;
+    top: -150px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -300px;
+    bottom: -150px;
+}
+form{
+    height: auto;
+    width: 900px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 35px;
+    
+}
+
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+label{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    width: 350px;
+    float: left;
+}
+input{
+    height: 50px;
+    width: 300px;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: #e5e5e5;
+}
+button{
+    margin-left: 150px;
+    margin-top: 50px;
+    width: 60%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.social{
+  margin-top: 30px;
+  display: flex;
+}
+.social div{
+  background: red;
+  width: 150px;
+  border-radius: 3px;
+  padding: 5px 10px 10px 5px;
+  background-color: rgba(255,255,255,0.27);
+  color: #eaf0fb;
+  text-align: center;
+}
+.social div:hover{
+  background-color: rgba(255,255,255,0.47);
+}
+.social .fb{
+  margin-left: 25px;
+}
+.social i{
+  margin-right: 4px;
+}
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form method='post'>
+        {% csrf_token %}
+        <h3>Register</h3>
+
+        <label for="fname">First Name</label>
+        <input type="text" placeholder="Enter First Name" name="fname" required><br>
+
+        <label for="lname">Last Name</label>
+        <input type="text" placeholder="Enter Last Name" name="lname" required><br>
+
+        <label for="email">E-mail</label>
+        <input type="email" placeholder="Enter E-mail" name="email" required><br>
+        
+        <label for="Phone">Phone Number</label>
+        <input type="tel" pattern="[0-9]{10}" placeholder="Enter phone number" name="phno" required><br>
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="*****" name="passw" id="pass1" minlength="5" maxlength="20" required><br>
+
+        <label for="Password">Confirm Password</label>
+        <input type="password" placeholder="*****" name="confpassw" id="pass2" minlength="5" maxlength="20" onKeyUp="chk_pass2()" onBlur="chk_pass()" required>
+        <i style="font-size:15px;font-family:Times New Roman;color:#ffd700" id="pass_mismatch"></i><br>
+        <div style="font-size: 18px; float: left;">
+        <label for="gender">Gender</label><br>
+        <input style="height: 15px; width: 15px;" type="radio" name="gender" value="m" required>&nbsp;Male&nbsp;&nbsp;
+        <input style="height: 15px; width: 15px;" type="radio" name="gender" value="f" required>&nbsp;Female&nbsp;&nbsp;&nbsp;
+        <input style="height: 15px; width: 15px;" type="radio" name="gender" value="o" required>&nbsp;Others
+    </div>
+        <label for="DOB">DOB</label>
+        <input type="date" name="dob" id="dob" onBlur="chk_dob()" required>
+        <i id="underage" style="font-size:15px;font-family:Times New Roman;color:#ffd700"></i>
+        <!--Taking date only if age criteria is met-->
+        <input type="hidden" name="verf_dob" id="auth_dob">
+        
+        <button>Register</button>
+        <!--Link for login-->
+        <div class="social">
+            Already Registered?&nbsp;&nbsp;
+            <a href="http://127.0.0.1:8000/login"><b>Login</b></a>
+        </div>
+    </form>
+
+    <script>
+        //for onblur, makes input empty
+        function chk_pass(){
+            var pass1=document.getElementById("pass1").value;
+            var pass2=document.getElementById("pass2").value;
+            if (pass1!=pass2){
+                document.getElementById("pass_mismatch").innerHTML="*password did not match";
+                document.getElementById("pass2").value="";
+            }
+            else{
+                document.getElementById("pass_mismatch").innerHTML="";
+            }
+        }
+        //for onkeyup, shows message
+        function chk_pass2(){
+            var pass1=document.getElementById("pass1").value;
+            var pass2=document.getElementById("pass2").value;
+            if (pass1!=pass2){
+                document.getElementById("pass_mismatch").innerHTML="*password did not match";
+            }
+            else{
+                document.getElementById("pass_mismatch").innerHTML="";
+            }
+        }
+        //for validating age(minimum 12 year by currrent date)
+        function chk_dob(){
+            var pd=new Date();
+            var dt=pd.getDate();//date
+            if(dt<=9){
+                dt='0'+dt;
+            }
+            var mth=pd.getMonth()+1;//month(-1)
+            if(mth<=9){
+                mth='0'+mth;
+            }
+            var yr=pd.getFullYear()-12;//fullyear
+            var crr_date=yr+"-"+(mth)+"-"+dt;//making full date for age validation
+            var user_dt=document.getElementById("dob").value;//taking user's dob
+            
+            //if req. year is same
+            if(crr_date.slice(0,5)==user_dt.slice(0,5)){
+            //check month
+                //if req. month is same
+                if(crr_date.slice(6,8)==user_dt.slice(6,8)){
+                //check date
+                    // if date req. is same or of before
+                    if(crr_date.slice(9,)>=user_dt.slice(9,)){
+                        document.getElementById("underage").innerHTML="";
+                        document.getElementById("auth_dob").value=user_dt;
+                    }
+                    else{
+                        document.getElementById("underage").innerHTML="*min. age 12yr.";
+                        document.getElementById("dob").value="";
+                    }
+            
+                }
+                //if month is before req. month
+                else if(crr_date.slice(6,8)>user_dt.slice(6,8)){
+                    document.getElementById("auth_dob").value=user_dt;
+                    document.getElementById("underage").innerHTML="";
+                }
+                else{
+                    document.getElementById("underage").innerHTML="*min. age 12yr.";
+                    document.getElementById("dob").value="";
+                }
+            }
+            //if year is before req. year
+            else if(crr_date.slice(0,5)>user_dt.slice(0,5)){
+                document.getElementById("auth_dob").value=user_dt;
+                document.getElementById("underage").innerHTML="";
+            }
+            //if year is after req. year
+            else{
+                document.getElementById("dob").value="";
+                document.getElementById("underage").innerHTML="*min. age 12yr.";
+            }
+            
+            }
+        </script>
+        
+</body>
+</html>
+  
+</body>
+</html> 
